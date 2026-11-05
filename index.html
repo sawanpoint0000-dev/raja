@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090806">
+<title>REALSELER | Premium ID Store</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#090806;
+  --panel:#15120c;
+  --gold:#d9ad55;
+  --gold-light:#f5dda6;
+  --text:#f8f1e5;
+  --muted:#a99d88;
+  --line:rgba(222,177,91,.23);
+}
+* {box-sizing:border-box}
+[hidden] {display:none!important}
+body {
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  background:radial-gradient(ellipse at 50% -10%,#3b2a12,transparent 55%),var(--bg);
+  font-family:"DM Sans",sans-serif;
+}
+button,input {font:inherit}
+button {cursor:pointer}
+.header {
+  width:min(1100px,calc(100% - 35px));
+  margin:auto;
+  padding:22px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--line);
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:var(--text);
+}
+.brand-logo {
+  width:43px;height:43px;
+  display:grid;place-items:center;
+  border-radius:12px;
+  color:#211606;
+  background:linear-gradient(140deg,#f8e4b3,#b77b26);
+  font:800 25px "Playfair Display",serif;
+}
+.brand strong {display:block;letter-spacing:2px;font-size:15px}
+.brand strong span {color:var(--gold-light)}
+.brand small {
+  display:block;margin-top:3px;
+  color:var(--muted);font-size:8px;letter-spacing:2px;
+}
+.live-status,.stock-pill {
+  padding:9px 13px;
+  border:1px solid var(--line);
+  border-radius:30px;
+  color:var(--gold-light);
+  font-size:10px;letter-spacing:1px;
+}
+.live-status i,.stock-pill i {
+  display:inline-block;width:7px;height:7px;
+  margin-right:5px;border-radius:50%;
+  background:#8ed6a1;box-shadow:0 0 10px #8ed6a1;
+}
+.container {width:min(750px,calc(100% - 28px));margin:auto}
+.hero {padding:58px 10px 34px;text-align:center}
+.eyebrow,.kicker {
+  color:var(--gold);font-size:10px;
+  font-weight:800;letter-spacing:2px;
+}
+.hero h1 {
+  margin:18px 0 12px;
+  font:700 clamp(38px,7vw,61px)/1.08 "Playfair Display",serif;
+}
+.hero h1 span {color:var(--gold-light)}
+.hero p {
+  max-width:470px;margin:auto;
+  color:var(--muted);font-size:14px;line-height:1.8;
+}
+.trust {
+  display:flex;justify-content:center;flex-wrap:wrap;
+  gap:17px;margin-top:22px;color:#c8bda9;font-size:11px;
+}
+.store-card {
+  padding:clamp(20px,5vw,36px);
+  border:1px solid rgba(225,184,103,.28);
+  border-radius:24px;
+  background:linear-gradient(145deg,#1d1910,#0e0d09);
+  box-shadow:0 25px 80px #0008;
+}
+.card-heading {
+  display:flex;justify-content:space-between;
+  align-items:center;gap:12px;
+}
+.card-heading h2 {
+  margin:7px 0 0;font:600 25px "Playfair Display",serif;
+}
+.summary {
+  display:flex;align-items:center;gap:28px;
+  margin:25px 0 20px;padding:17px;
+  border:1px solid var(--line);border-radius:14px;
+  background:rgba(218,171,83,.07);
+}
+.summary>div:not(.summary-divider) {
+  display:flex;flex-direction:column;gap:5px;
+}
+.summary small {color:var(--muted);font-size:9px;letter-spacing:1px}
+.summary strong {color:var(--gold-light);font-size:21px}
+.summary-divider {height:35px;width:1px;background:var(--line)}
+.quantity-grid {
+  display:grid;grid-template-columns:repeat(4,1fr);gap:11px;
+}
+.quantity-card {
+  min-height:110px;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;gap:7px;
+  border:1px solid var(--line);border-radius:14px;
+  color:var(--text);background:linear-gradient(160deg,#211c12,#11100b);
+}
+.quantity-card:hover,.quantity-card.active {
+  border-color:var(--gold);
+  background:linear-gradient(160deg,#493315,#21170b);
+  transform:translateY(-2px);
+}
+.quantity-card small {color:var(--gold);letter-spacing:2px}
+.quantity-card span {color:var(--gold-light);font-weight:700;font-size:12px}
+.field-label {
+  display:block;margin:22px 0 9px;color:var(--muted);
+  font-size:9px;font-weight:800;letter-spacing:1px;
+}
+.quantity-input,.utr-box input {
+  width:100%;padding:15px;
+  border:1px solid var(--line);border-radius:12px;
+  outline:none;color:var(--text);background:#0b0a07;
+}
+.quantity-input:focus,.utr-box input:focus {border-color:var(--gold)}
+.terms-box {
+  display:flex;align-items:flex-start;gap:10px;
+  margin:19px 0;color:var(--muted);
+  font-size:11px;line-height:1.7;
+}
+.terms-box input {margin-top:3px;accent-color:var(--gold)}
+.text-link {
+  padding:0;border:0;color:var(--gold-light);
+  background:none;text-decoration:underline;font-size:inherit;
+}
+.buy-button {
+  width:100%;min-height:51px;padding:13px;
+  border:0;border-radius:12px;color:#211606;
+  background:linear-gradient(110deg,#f4dda8,#d5a64f,#b77c28);
+  box-shadow:0 8px 25px #c48f312e;font-weight:800;
+}
+.buy-button:disabled {opacity:.4;cursor:not-allowed}
+.secure-note {color:#8f8574;text-align:center;font-size:10px}
+.announcement,.closed-box,.hint-box,.error-box {
+  display:none;margin-top:13px;padding:12px;
+  border-radius:10px;font-size:12px;
+}
+.announcement.show,.closed-box.show,.hint-box.show {display:block}
+.announcement,.hint-box {
+  color:var(--gold-light);background:#d9ad5512;border:1px solid var(--line);
+}
+.closed-box,.error-box {
+  color:#ffaaa0;background:#ff665512;border:1px solid #ff665533;
+}
+.error-box {display:block}
+.flow-panel {
+  margin-top:23px;padding:22px;
+  border:1px solid var(--line);border-radius:17px;
+  background:#08080599;text-align:center;
+}
+.flow-heading {
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:18px;text-align:left;
+}
+.step-badge {
+  width:35px;height:35px;display:grid;place-items:center;
+  border-radius:50%;color:#211606;background:var(--gold);font-weight:800;
+}
+.flow-heading h3,.flow-panel h3 {
+  margin:4px 0 0;font:600 22px "Playfair Display",serif;
+}
+.amount-box {
+  display:flex;justify-content:space-around;
+  padding:15px;border-radius:12px;background:#d9ad5510;
+}
+.amount-box div {display:flex;flex-direction:column;gap:6px}
+.amount-box small {color:var(--muted);font-size:9px}
+.amount-box strong {color:var(--gold-light);font-size:20px}
+.qr-frame {
+  width:220px;min-height:220px;margin:20px auto 10px;
+  padding:10px;display:grid;place-items:center;
+  border-radius:13px;color:#302719;background:white;font-size:12px;
+}
+#qr {display:none;width:100%;height:auto}
+.utr-box {margin:18px 0 12px;text-align:left}
+.utr-box label {
+  display:block;margin-bottom:8px;color:var(--muted);
+  font-size:10px;font-weight:800;letter-spacing:1px;
+}
+.utr-box input {letter-spacing:1px}
+.utr-submit {margin-top:11px}
+.expiry-note,.flow-panel p {
+  color:var(--muted);font-size:12px;line-height:1.7;
+}
+.secondary-button {
+  padding:12px 17px;border:1px solid var(--line);
+  border-radius:11px;color:var(--gold-light);
+  background:#d9ad5510;font-size:12px;font-weight:700;
+}
+.loader {
+  width:35px;height:35px;margin:0 auto 17px;
+  border:3px solid #d9ad5533;border-top-color:var(--gold-light);
+  border-radius:50%;animation:spin .8s linear infinite;
+}
+@keyframes spin {to{transform:rotate(360deg)}}
+.success-icon {
+  width:46px;height:46px;margin:0 auto 14px;
+  display:grid;place-items:center;border-radius:50%;
+  color:#102013;background:#8ed6a1;font-size:25px;font-weight:900;
+}
+.delivery-output {
+  padding:15px;border:1px solid var(--line);border-radius:11px;
+  color:var(--gold-light);background:#080805;text-align:left;
+  white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.7 monospace;
+}
+.support-card {
+  margin:18px 0 35px;padding:18px;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  border:1px solid var(--line);border-radius:15px;background:#15120c;
+}
+.support-card strong {font-size:13px}
+.support-card p {margin:5px 0 0;color:var(--muted);font-size:11px}
+.footer {
+  width:min(1100px,calc(100% - 35px));margin:auto;padding:20px 0;
+  display:flex;justify-content:space-between;
+  border-top:1px solid var(--line);color:#817766;font-size:9px;
+}
+.modal {
+  position:fixed;z-index:10;inset:0;padding:18px;
+  display:grid;place-items:center;background:#000c;backdrop-filter:blur(8px);
+}
+.modal-card {
+  position:relative;width:min(480px,100%);max-height:82vh;
+  overflow:auto;padding:28px;border:1px solid var(--line);
+  border-radius:19px;background:#15120c;
+}
+.modal-card h3 {font:600 25px "Playfair Display",serif}
+.modal-close {
+  position:absolute;top:12px;right:15px;border:0;
+  color:var(--muted);background:none;font-size:27px;
+}
+.policy-highlight {
+  padding:11px;border-radius:9px;color:var(--gold-light);
+  background:#d9ad5512;font-size:12px;
+}
+.policy-body {color:#c2b7a4;font-size:12px;line-height:1.8}
+.policy-body p {margin:8px 0}
+.modal-card .buy-button {margin-top:15px}
+.modal-dismiss {
+  display:block;margin:12px auto 0;border:0;
+  color:var(--muted);background:none;
+}
+.toast {
+  position:fixed;z-index:20;left:50%;bottom:24px;
+  max-width:calc(100% - 30px);padding:12px 18px;
+  border:1px solid var(--line);border-radius:12px;
+  color:var(--gold-light);background:#211a0e;
+  opacity:0;pointer-events:none;transform:translate(-50%,12px);
+  transition:.25s;font-size:12px;
+}
+.toast.show {opacity:1;transform:translate(-50%,0)}
+@media(max-width:560px) {
+  .header {width:calc(100% - 25px)}
+  .container {width:calc(100% - 22px)}
+  .hero {padding-top:45px}
+  .quantity-grid {grid-template-columns:repeat(2,1fr)}
+  .card-heading {align-items:flex-start;flex-direction:column}
+  .summary {justify-content:space-between;gap:12px}
+  .support-card {flex-wrap:wrap}
+  .footer {flex-direction:column;gap:9px;text-align:center}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <a class="brand" href="#">
+    <span class="brand-logo">R</span>
+    <span>
+      <strong>REAL<span>SELER</span></strong>
+      <small>PREMIUM DIGITAL STORE</small>
+    </span>
+  </a>
+  <div class="live-status"><i></i> LIVE STORE</div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="eyebrow">✦ EXCLUSIVE DIGITAL COLLECTION ✦</div>
+    <h1>Premium IDs.<br><span>Simply Delivered.</span></h1>
+    <p>Choose your quantity, complete your payment, and receive your order after verification.</p>
+    <div class="trust">
+      <span>✓ Secure checkout</span>
+      <span>✓ Live stock</span>
+      <span>✓ Support available</span>
+    </div>
+  </section>
+
+  <section class="store-card">
+    <div id="selectSection">
+      <div class="card-heading">
+        <div>
+          <small class="kicker">STORE INVENTORY</small>
+          <h2>Choose your quantity</h2>
+        </div>
+        <div class="stock-pill"><i></i><span id="stock">--</span> AVAILABLE</div>
+      </div>
+
+      <div id="adminAnnouncement" class="announcement"></div>
+      <div id="shopClosedBox" class="closed-box">Store is currently closed.</div>
+
+      <div class="summary">
+        <div>
+          <small>PRICE PER ID</small>
+          <strong id="unitPrice">₹50</strong>
+        </div>
+        <div class="summary-divider"></div>
+        <div>
+          <small>AVAILABLE STOCK</small>
+          <strong><span id="stockMini">--</span> <small>items</small></strong>
+        </div>
+      </div>
+
+      <div class="quantity-grid">
+        <button class="quantity-card" type="button" data-qty="1">
+          <small>01</small><strong>1 ID</strong><span id="p1">₹50</span>
+        </button>
+        <button class="quantity-card" type="button" data-qty="2">
+          <small>02</small><strong>2 IDs</strong><span id="p2">₹100</span>
+        </button>
+        <button class="quantity-card" type="button" data-qty="5">
+          <small>05</small><strong>5 IDs</strong><span id="p5">₹250</span>
+        </button>
+        <button class="quantity-card" type="button" data-qty="10">
+          <small>10</small><strong>10 IDs</strong><span id="p10">₹500</span>
+        </button>
+      </div>
+
+      <label class="field-label" for="customQuantity">CUSTOM QUANTITY</label>
+      <input id="customQuantity" class="quantity-input" type="number" min="1" step="1" placeholder="Enter quantity">
+
+      <div id="smartHint" class="hint-box">Please accept Terms & Conditions first.</div>
+
+      <div class="terms-box">
+        <input id="termsAccept" type="checkbox">
+        <label for="termsAccept">
+          I agree to the
+          <button type="button" class="text-link" id="openTermsBtn">Terms & Conditions</button>
+          and have read the
+          <button type="button" class="text-link" id="replacementLink">Replacement Policy</button>.
+        </label>
+      </div>
+
+      <button id="buy" class="buy-button" type="button" disabled>Buy Now</button>
+      <p class="secure-note">▣ Secure payment • Delivery after verification</p>
+    </div>
+
+    <section id="paymentSection" class="flow-panel" hidden>
+      <div class="flow-heading">
+        <span class="step-badge">02</span>
+        <div>
+          <small class="kicker">PAYMENT</small>
+          <h3>Scan to Pay</h3>
+        </div>
+      </div>
+
+      <div class="amount-box">
+        <div><small>QUANTITY</small><strong id="pq">0</strong></div>
+        <div><small>TOTAL AMOUNT</small><strong>₹<span id="pa">0</span></strong></div>
+      </div>
+
+      <div class="qr-frame">
+        <div id="qrLoading">Generating secure QR...</div>
+        <img id="qr" alt="Payment QR Code">
+      </div>
+
+      <p id="qrExpiry" class="expiry-note">Scan & pay the exact amount shown above.</p>
+
+      <div class="utr-box" id="utrBox">
+        <label for="utrInput">PAYMENT UTR / TRANSACTION ID</label>
+        <input id="utrInput" type="text" inputmode="numeric"
+          autocomplete="off" maxlength="12" placeholder="Enter 12 digit UTR">
+        <button id="submitUtrBtn" class="buy-button utr-submit" type="button">SUBMIT UTR</button>
+      </div>
+
+      <div id="paymentError" class="error-box" hidden></div>
+      <button id="cancelPayment" class="secondary-button" type="button">Cancel and Go Back</button>
+    </section>
+
+    <section id="processing" class="flow-panel" hidden>
+      <div class="loader"></div>
+      <small class="kicker">PAYMENT SUBMITTED</small>
+      <h3>Waiting for admin approval</h3>
+      <p>Your UTR has been submitted. Please wait for verification.</p>
+    </section>
+
+    <section id="success" class="flow-panel" hidden>
+      <div class="success-icon">✓</div>
+      <small class="kicker">ORDER COMPLETE</small>
+      <h3>Your order is delivered</h3>
+      <p>Your delivered details are shown below. Keep them private.</p>
+      <pre id="ids" class="delivery-output"></pre>
+      <button id="copyBtn" class="buy-button" type="button">Copy Details</button>
+    </section>
+  </section>
+
+  <section class="support-card">
+    <div>
+      <strong>Need assistance?</strong>
+      <p>Contact store support for order-related help.</p>
+    </div>
+    <button type="button" class="secondary-button" id="whatsappBtn">WhatsApp ↗</button>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>© <span id="year"></span> REALSELER. All rights reserved.</span>
+  <span>PREMIUM DIGITAL STORE</span>
+</footer>
+
+<div id="policyModal" class="modal" hidden>
+  <div class="modal-card">
+    <button class="modal-close" type="button" id="closePolicyBtn">×</button>
+    <small class="kicker">STORE INFORMATION</small>
+    <h3 id="policyTitle">Terms & Conditions</h3>
+    <div id="policyHighlight" class="policy-highlight">Please read carefully</div>
+    <div id="policyBody" class="policy-body"></div>
+    <button type="button" class="buy-button" id="acceptPolicyBtn">I Agree</button>
+    <button type="button" class="modal-dismiss" id="dismissPolicyBtn">Close</button>
+  </div>
+</div>
+
+<div id="custom-alert" class="toast" role="status" aria-live="polite"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {
+  getDatabase, ref, onValue, push, update
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+/* YOUR EXISTING SERVER URLS */
+const CONFIG_URL = "https://idstor.sawanenter7209.workers.dev/config";
+const WORKER_URL = "https://qrsent.sawanenter7209.workers.dev/";
+
+let db;
+let qty = 0;
+let price = 50;
+let orderId = "";
+let stockCount = 0;
+let shopOpen = true;
+let requireTerms = true;
+let userAcceptedTerms = false;
+let whatsappNumber = "";
+let replacementTime = "11:05 AM";
+let replacementText = "";
+let termsText = "";
+let stopOrderListener = null;
+let creatingOrder = false;
+let utrSubmitting = false;
+let paymentRejected = false;
+
+const $ = id => document.getElementById(id);
+$("year").textContent = new Date().getFullYear();
+
+function showAlert(msg) {
+  const box = $("custom-alert");
+  box.textContent = msg;
+  box.classList.add("show");
+  clearTimeout(showAlert.timer);
+  showAlert.timer = setTimeout(() => box.classList.remove("show"), 2800);
+}
+
+function showError(msg) {
+  $("paymentError").textContent = msg;
+  $("paymentError").hidden = false;
+}
+
+function hideError() {
+  $("paymentError").hidden = true;
+  $("paymentError").textContent = "";
+}
+
+function canBuy() {
+  return qty > 0 && stockCount > 0 &&
+    qty <= stockCount && shopOpen &&
+    (!requireTerms || userAcceptedTerms);
+}
+
+function refreshBuyState() {
+  $("buy").disabled = !canBuy() || creatingOrder;
+  $("smartHint").classList.toggle(
+    "show", qty > 0 && requireTerms && !userAcceptedTerms
+  );
+  $("shopClosedBox").classList.toggle("show", !shopOpen);
+
+  $("buy").textContent = qty > 0
+    ? `Buy Now • ₹${qty * price}`
+    : "Buy Now";
+}
+
+function updatePrices() {
+  $("unitPrice").textContent = `₹${price}`;
+  $("p1").textContent = `₹${price}`;
+  $("p2").textContent = `₹${price * 2}`;
+  $("p5").textContent = `₹${price * 5}`;
+  $("p10").textContent = `₹${price * 10}`;
+}
+
+function applyAdminSettings(settings = {}) {
+  shopOpen = settings.shopOpen !== false;
+
+  const p = Number(settings.pricePerId);
+  price = Number.isFinite(p) && p > 0 ? p : 50;
+
+  whatsappNumber = String(
+    settings.whatsappNumber || settings.supportNumber || ""
+  ).replace(/\D/g, "");
+
+  replacementTime = settings.replacementTime || "11:05 AM";
+  replacementText = settings.replacementText || "";
+  termsText = settings.termsText || "";
+  requireTerms = settings.requireTerms !== false;
+
+  document.querySelector(".terms-box").style.display =
+    requireTerms ? "flex" : "none";
+
+  if (!requireTerms) {
+    userAcceptedTerms = true;
+    $("termsAccept").checked = true;
+  }
+
+  if (settings.announcement) {
+    $("adminAnnouncement").textContent = settings.announcement;
+    $("adminAnnouncement").classList.add("show");
+  } else {
+    $("adminAnnouncement").classList.remove("show");
+  }
+
+  updatePrices();
+  refreshBuyState();
+}
+
+function startApp() {
+  onValue(ref(db, "settings"), snap => {
+    applyAdminSettings(snap.val() || {});
+  });
+
+  onValue(ref(db, "stock"), snap => {
+    let available = 0;
+
+    snap.forEach(child => {
+      const item = child.val() || {};
+      if (item.sold !== true && !item.allocatedTo) available++;
+    });
+
+    stockCount = available;
+    $("stock").textContent = available;
+    $("stockMini").textContent = available;
+    refreshBuyState();
+  });
+}
+
+async function initFirebase() {
+  try {
+    const res = await fetch(CONFIG_URL, { cache: "no-store" });
+    if (!res.ok) throw new Error("Config failed");
+
+    const config = await res.json();
+    db = getDatabase(initializeApp(config));
+    startApp();
+  } catch (err) {
+    console.error(err);
+    showAlert("Server connection failed. Please refresh.");
+  }
+}
+
+function pick(selectedQty, el) {
+  if (!shopOpen) return showAlert("Store is currently closed.");
+  if (stockCount <= 0) return showAlert("No stock available.");
+  if (selectedQty > stockCount) return showAlert("Not enough stock.");
+
+  qty = selectedQty;
+  $("customQuantity").value = "";
+
+  document.querySelectorAll(".quantity-card").forEach(c => {
+    c.classList.remove("active");
+  });
+
+  if (el) el.classList.add("active");
+  refreshBuyState();
+
+  if (requireTerms && !userAcceptedTerms) {
+    showAlert("Please accept Terms & Conditions first.");
+  }
+}
+
+function customQty(val) {
+  const entered = Number(val);
+
+  document.querySelectorAll(".quantity-card").forEach(c => {
+    c.classList.remove("active");
+  });
+
+  if (!Number.isInteger(entered) || entered < 1) {
+    qty = 0;
+    refreshBuyState();
+    return;
+  }
+
+  qty = entered;
+  refreshBuyState();
+
+  if (qty > stockCount) {
+    showAlert("Entered quantity is greater than available stock.");
+  }
+}
+
+function stopListeningToOrder() {
+  if (typeof stopOrderListener === "function") {
+    stopOrderListener();
+    stopOrderListener = null;
+  }
+}
+
+/*
+  IMPORTANT:
+  QR create होने के बाद Processing listener शुरू नहीं होगा।
+  यूज़र UTR Submit करेगा तभी order status listener शुरू होगा।
+*/
+async function createPaymentQR() {
+  if (creatingOrder) return;
+  if (!db) return showAlert("Please wait. Server is connecting.");
+  if (!Number.isInteger(qty) || qty < 1) {
+    return showAlert("Please select a valid quantity.");
+  }
+  if (!shopOpen) return showAlert("Store is currently closed.");
+  if (qty > stockCount) return showAlert("Not enough stock.");
+  if (requireTerms && !userAcceptedTerms) {
+    return showAlert("Please accept Terms & Conditions.");
+  }
+
+  creatingOrder = true;
+  refreshBuyState();
+  $("buy").textContent = "Creating QR...";
+
+  try {
+    orderId = push(ref(db, "orders")).key;
+    if (!orderId) throw new Error("Could not create order ID");
+
+    const res = await fetch(`${WORKER_URL}create-qr`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderId, qty })
+    });
+
+    const result = await res.json().catch(() => ({}));
+
+    if (!res.ok || result.success !== true) {
+      throw new Error(result.message || result.error || "QR creation failed");
+    }
+
+    const imageUrl = result.qr?.image_url || result.image_url;
+    if (!imageUrl) throw new Error("QR image not returned");
+
+    stopListeningToOrder();
+    paymentRejected = false;
+
+    $("selectSection").hidden = true;
+    $("paymentSection").hidden = false;
+    $("processing").hidden = true;
+    $("success").hidden = true;
+
+    $("utrInput").value = "";
+    $("utrInput").disabled = false;
+    $("submitUtrBtn").disabled = false;
+    $("submitUtrBtn").textContent = "SUBMIT UTR";
+    $("utrBox").hidden = false;
+
+    $("pq").textContent = qty;
+    $("pa").textContent = Number(
+      result.amount ?? qty * price
+    ).toLocaleString("en-IN");
+
+    hideError();
+
+    $("qrLoading").style.display = "block";
+    $("qr").style.display = "none";
+
+    $("qr").onload = () => {
+      $("qr").style.display = "block";
+      $("qrLoading").style.display = "none";
+    };
+
+    $("qr").onerror = () => {
+      showError("QR image failed to load");
+      $("qrLoading").textContent = "QR image failed to load";
+    };
+
+    $("qr").src = imageUrl;
+    $("qrExpiry").textContent =
+      "Scan & pay the exact amount shown above.";
+
+    // No listener before UTR submission.
+  } catch (err) {
+    console.error(err);
+    showAlert(err.message || "Unable to create payment QR.");
+    $("selectSection").hidden = false;
+    $("paymentSection").hidden = true;
+  } finally {
+    creatingOrder = false;
+    refreshBuyState();
+  }
+}
+
+/*
+  Admin status listener:
+  pending तभी Processing दिखाएगा जब UTR मौजूद हो।
+*/
+function listenForPayment() {
+  stopListeningToOrder();
+
+  stopOrderListener = onValue(
+    ref(db, `orders/${orderId}`),
+    snap => {
+      if (!snap.exists()) return;
+
+      const order = snap.val() || {};
+      const status = String(order.status || "").toLowerCase();
+
+      // Delivery तभी जब Admin approve करे और ID उपलब्ध हो।
+      if (
+        (status === "approved" || status === "verified") &&
+        order.deliveredText
+      ) {
+        stopListeningToOrder();
+        showDelivered(order.deliveredText);
+        return;
+      }
+
+      if (status === "approved" || status === "verified") {
+        $("paymentSection").hidden = true;
+        $("processing").hidden = false;
+
+        $("processing").querySelector("h3").textContent =
+          "Payment approved";
+
+        $("processing").querySelector("p").textContent =
+          "Admin has approved your payment. Your delivery is being prepared.";
+        return;
+      }
+
+      if (status === "rejected" || status === "failed") {
+        paymentRejected = true;
+
+        $("processing").hidden = true;
+        $("paymentSection").hidden = false;
+
+        $("utrInput").disabled = true;
+        $("submitUtrBtn").disabled = true;
+
+        showError(
+          order.adminMessage ||
+          order.message ||
+          "Your payment was rejected. Please contact support."
+        );
+
+        $("qrExpiry").textContent =
+          "Payment rejected. Please contact store support.";
+
+        stopListeningToOrder();
+        return;
+      }
+
+      // KEY FIX: pending अकेले काफी नहीं है।
+      // UTR होना भी जरूरी है।
+      if (status === "pending" && order.utr) {
+        $("paymentSection").hidden = true;
+        $("processing").hidden = false;
+
+        $("processing").querySelector("h3").textContent =
+          "Waiting for admin approval";
+
+        $("processing").querySelector("p").textContent =
+          "Your UTR has been submitted. Please wait for admin approval. Your ID will appear only after approval.";
+      }
+    }
+  );
+}
+
+/*
+  UTR submit:
+  पहले validate होगा, फिर Firebase में सेव होगा,
+  उसके बाद Admin queue और Processing शुरू होंगे।
+*/
+async function submitUTR() {
+  if (utrSubmitting) return;
+
+  if (!db || !orderId) {
+    return showError("Order not found. Please create a new order.");
+  }
+
+  const utr = $("utrInput").value.trim();
+
+  if (!/^\d{12}$/.test(utr)) {
+    return showError("Please enter a valid 12 digit UTR.");
+  }
+
+  if (paymentRejected) {
+    return showError("This payment was rejected. Please contact support.");
+  }
+
+  try {
+    utrSubmitting = true;
+
+    $("submitUtrBtn").disabled = true;
+    $("submitUtrBtn").textContent = "SUBMITTING...";
+
+    // UTR submit होने पर ही Admin order queue में जाएगा।
+    await update(ref(db, `orders/${orderId}`), {
+      utr: utr,
+      status: "pending",
+      utrSubmittedAt: Date.now()
+    });
+
+    // Firebase update success के बाद ही listener शुरू होगा।
+    listenForPayment();
+
+    // अब Processing स्क्रीन खुलेगी।
+    $("paymentSection").hidden = true;
+    $("processing").hidden = false;
+
+    $("processing").querySelector("h3").textContent =
+      "Waiting for admin approval";
+
+    $("processing").querySelector("p").textContent =
+      "Your UTR has been submitted successfully. Do not pay again. Your ID will be shown only after admin approval.";
+
+    showAlert("UTR submitted. Waiting for admin approval.");
+
+  } catch (err) {
+    console.error("UTR submission failed:", err);
+
+    showError("UTR submit failed. Please try again.");
+
+    $("submitUtrBtn").disabled = false;
+    $("submitUtrBtn").textContent = "SUBMIT UTR";
+
+  } finally {
+    utrSubmitting = false;
+  }
+}
+
+function showDelivered(text) {
+  $("ids").textContent = String(text).trim();
+  $("paymentSection").hidden = true;
+  $("processing").hidden = true;
+  $("success").hidden = false;
+  showAlert("Order delivered successfully!");
+}
+
+async function copy() {
+  const text = $("ids").textContent.trim();
+  if (!text) return showAlert("Nothing to copy.");
+
+  try {
+    await navigator.clipboard.writeText(text);
+    showAlert("Copied successfully!");
+  } catch {
+    showAlert("Copy failed.");
+  }
+}
+
+function safeParagraphs(text, fallback) {
+  const content = text || fallback;
+  const div = document.createElement("div");
+
+  content.split("\n").map(line => line.trim()).filter(Boolean).forEach(line => {
+    const p = document.createElement("p");
+    p.textContent = "✔ " + line;
+    div.appendChild(p);
+  });
+
+  return div;
+}
+
+function openPolicy() {
+  $("policyTitle").textContent = "Replacement Policy";
+  $("policyHighlight").textContent =
+    `Replacement Policy : ${replacementTime}`;
+
+  $("policyBody").replaceChildren(
+    ...safeParagraphs(
+      replacementText,
+      "Replacement requests are subject to the stated policy time.\nKeep your order details ready.\nContact support for help."
+    ).childNodes
+  );
+
+  $("policyModal").hidden = false;
+}
+
+function openTerms() {
+  $("policyTitle").textContent = "Terms & Conditions";
+  $("policyHighlight").textContent = "Please read carefully";
+
+  $("policyBody").replaceChildren(
+    ...safeParagraphs(
+      termsText,
+      "All products are digital.\nDelivery after payment verification.\nContact support if paid but not delivered.\nBy continuing you accept these terms."
+    ).childNodes
+  );
+
+  $("policyModal").hidden = false;
+}
+
+function closePolicy() {
+  $("policyModal").hidden = true;
+}
+
+function acceptPolicy() {
+  $("termsAccept").checked = true;
+  userAcceptedTerms = true;
+  refreshBuyState();
+  closePolicy();
+  showAlert("Terms accepted.");
+}
+
+function openWhatsApp() {
+  if (!whatsappNumber) {
+    return showAlert("Support number not configured.");
+  }
+
+  window.open(
+    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello REALSELER Support!")}`,
+    "_blank",
+    "noopener"
+  );
+}
+
+/* BUTTON EVENTS */
+document.querySelectorAll(".quantity-card").forEach(btn => {
+  btn.addEventListener("click", () => {
+    pick(Number(btn.dataset.qty), btn);
+  });
+});
+
+$("customQuantity").addEventListener("input", e => {
+  customQty(e.target.value);
+});
+
+$("buy").addEventListener("click", createPaymentQR);
+
+$("utrInput").addEventListener("input", () => {
+  $("utrInput").value =
+    $("utrInput").value.replace(/\D/g, "").slice(0, 12);
+  hideError();
+});
+
+$("submitUtrBtn").addEventListener("click", submitUTR);
+
+$("cancelPayment").addEventListener("click", () => {
+  if (!confirm("Leave payment page? If already paid, do not cancel.")) return;
+
+  stopListeningToOrder();
+
+  $("paymentSection").hidden = true;
+  $("selectSection").hidden = false;
+
+  orderId = "";
+  paymentRejected = false;
+
+  $("utrInput").value = "";
+  $("utrInput").disabled = false;
+  $("submitUtrBtn").disabled = false;
+  $("submitUtrBtn").textContent = "SUBMIT UTR";
+  $("utrBox").hidden = false;
+
+  $("qr").removeAttribute("src");
+  $("qr").style.display = "none";
+  $("qrLoading").style.display = "block";
+  $("qrLoading").textContent = "Generating secure QR...";
+
+  hideError();
+});
+
+$("copyBtn").addEventListener("click", copy);
+$("whatsappBtn").addEventListener("click", openWhatsApp);
+$("openTermsBtn").addEventListener("click", openTerms);
+$("replacementLink").addEventListener("click", openPolicy);
+$("closePolicyBtn").addEventListener("click", closePolicy);
+$("dismissPolicyBtn").addEventListener("click", closePolicy);
+$("acceptPolicyBtn").addEventListener("click", acceptPolicy);
+
+$("termsAccept").addEventListener("change", () => {
+  userAcceptedTerms = $("termsAccept").checked;
+  refreshBuyState();
+});
+
+$("policyModal").addEventListener("click", e => {
+  if (e.target === $("policyModal")) closePolicy();
+});
+
+initFirebase();
+
+// F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U ब्लॉक
+document.addEventListener("keydown", function (e) {
+    if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+        (e.ctrlKey && e.key.toUpperCase() === "U")
+    ) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+}, true);
+
+// Right Click ब्लॉक
+document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+    return false;
+});
+</script>
+</body>
+</html>
